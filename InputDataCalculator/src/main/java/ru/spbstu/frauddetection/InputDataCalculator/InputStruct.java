@@ -1,8 +1,9 @@
 package ru.spbstu.frauddetection.InputDataCalculator;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class InputStruct {
+public class InputStruct implements Serializable {
     private LinkedList<InputGroup> struct;
 
     public InputStruct() {

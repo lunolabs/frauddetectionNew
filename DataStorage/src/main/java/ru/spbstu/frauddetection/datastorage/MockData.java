@@ -1,6 +1,5 @@
 package ru.spbstu.frauddetection.datastorage;
 
-
 import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Field;
 import ru.spbstu.frauddetection.InputDataCalculator.InputGroup;
 import ru.spbstu.frauddetection.InputDataCalculator.InputType;

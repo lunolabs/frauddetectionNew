@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class AbstractData implements Serializable {
+public abstract class AbstractData implements Serializable {
     //abstract public List<InputGroup> getData();
     abstract public List<InputGroup> getValues(List<Field> list);
     abstract public void addValue(String xmlInput);

@@ -11,26 +11,25 @@ import javax.xml.xpath.XPathFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InputCalculator {
+public class InputCalculator implements Serializable {
     private static final Logger logger = Logger.getLogger(String.valueOf(InputCalculator.class));
 
-    public static List<InputGroup> calculate(Configuration configuration, String inputXml){
+    public static List<InputGroup> calculate(Configuration configuration, String inputXml) {
         List<InputGroup> inputStruct = new ArrayList<InputGroup>();
 
         for (Group groupConfig : configuration.getGroups()) {
             InputGroup resultGroup = new InputGroup();
             try {
                 roundGroup(groupConfig, inputXml, resultGroup);
-            } catch (XPathExpressionException ex)
-            {
+            } catch (XPathExpressionException ex) {
                 logger.log(Level.ALL, "Excpetion of parsing: " + ex);
             }
             inputStruct.add(resultGroup);
-
         }
         return inputStruct;
     }
@@ -43,7 +42,6 @@ public class InputCalculator {
             val = val.getGroup();
             roundGroup(val, inputXml, result.getGroup());
         }
-
     }
 
     public static InputGroup calculateValues(Group val, String inputXml) throws XPathExpressionException {
@@ -64,8 +62,6 @@ public class InputCalculator {
                 }
             }
         }
-
-
         return inputGroup;
     }
 }

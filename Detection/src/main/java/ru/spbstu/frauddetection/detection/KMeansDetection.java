@@ -71,7 +71,7 @@ public class KMeansDetection extends DetectionBaseSpark<String> {
 
             for (Field field : configGroup.getFields()) {
                 if (valueName.equals(field.getXpathName()) &&
-                        (field.getType() == Type.Integer || field.getType() == Type.Float)) {
+                        (field.getType() == Type.Integer || field.getType() == Type.Double)) {
                     converted += value.getT().toString() + " ";
                 }
             }

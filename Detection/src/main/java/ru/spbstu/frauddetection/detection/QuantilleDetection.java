@@ -54,7 +54,7 @@ public class QuantilleDetection<T extends Number> extends DetectionBaseSpark<T>{
 
             for (Field field : configGroup.getFields()) {
                 if (valueName.equals(field.getXpathName()) &&
-                   (field.getType() == Type.Integer || field.getType() == Type.Float)) {
+                   (field.getType() == Type.Integer || field.getType() == Type.Double)) {
                     converted.add((Number) value.getT());
                 }
             }

@@ -3,11 +3,11 @@ package ru.spbstu.frauddetection.FraudConfig.ConfigurationParser;
 import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Configuration;
 import org.xml.sax.SAXException;
 import javax.xml.bind.*;
+import java.io.Serializable;
 import java.io.StringReader;
 
 
-public class ConfigurationParser
-{
+public class ConfigurationParser implements Serializable{
 
     public Configuration parseConfiguration(String configFile) throws JAXBException, SAXException {
         JAXBContext context = JAXBContext.newInstance(Configuration.class);

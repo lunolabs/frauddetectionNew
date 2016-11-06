@@ -47,9 +47,6 @@ public class InputGroup implements Serializable {
 
     @Override
     public String toString() {
-        return "InputGroup{" +
-                "values=" + values +
-                ", group=" + group +
-                '}';
+        return "InputGroup{values=" + values + ", group=" + group + "}";
     }
 }

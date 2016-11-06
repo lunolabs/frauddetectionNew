@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 @XmlRootElement(name = "fraudconfig")
 public class Configuration implements Serializable {
     private List<Group> groups;
@@ -18,9 +19,7 @@ public class Configuration implements Serializable {
 
     @Override
     public String toString() {
-        return "Configuration{" +
-                "groups=" + groups +
-                '}';
+        return "Configuration{groups=" + groups + "}";
     }
 
     public List<Field> getUniqueFields() {

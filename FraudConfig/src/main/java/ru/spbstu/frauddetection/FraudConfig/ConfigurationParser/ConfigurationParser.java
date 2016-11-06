@@ -9,7 +9,7 @@ import java.io.StringReader;
 
 public class ConfigurationParser implements Serializable{
 
-    public Configuration parseConfiguration(String configFile) throws JAXBException, SAXException {
+    public static Configuration parse(String configFile) throws JAXBException, SAXException {
         JAXBContext context = JAXBContext.newInstance(Configuration.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         StringReader reader = new StringReader(configFile);

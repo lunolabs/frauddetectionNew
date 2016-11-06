@@ -5,21 +5,21 @@
                 <xpath_name>desease</xpath_name>
                 <type>String</type>
         </field>
+    </group>
         <group method="Sentence">
             <field>
                 <xpath_name>medicine</xpath_name>
                 <type>String</type>
             </field>
-            <group method="KMeans">
-                <field>
-                    <xpath_name>dosage</xpath_name>
-                    <type>Integer</type>
-                </field>
-                <field>
-                    <xpath_name>times</xpath_name>
-                    <type>Integer</type>
-                </field>
-            </group>
         </group>
+    <group method="KMeans">
+        <field>
+            <xpath_name>dosage</xpath_name>
+            <type>Integer</type>
+        </field>
+        <field>
+            <xpath_name>times</xpath_name>
+            <type>Integer</type>
+        </field>
     </group>
 </fraudconfig>

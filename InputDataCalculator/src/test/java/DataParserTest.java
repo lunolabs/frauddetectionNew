@@ -20,7 +20,7 @@ public class DataParserTest extends TestCase {
 
         parser = new ConfigurationParser();
         initFile();
-        config = parser.parseConfiguration(file);
+        config = parser.parse(file);
 
 
         xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +

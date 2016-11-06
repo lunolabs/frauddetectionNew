@@ -24,7 +24,7 @@ public class ConfigParserTest extends TestCase {
     @Test
     public void testParse() throws Exception {
         initFile();
-        config = parser.parseConfiguration(file);
+        config = parser.parse(file);
         System.out.println(config);
     }
 

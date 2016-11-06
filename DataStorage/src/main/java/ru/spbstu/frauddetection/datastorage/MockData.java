@@ -4,12 +4,11 @@ import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Field;
 import ru.spbstu.frauddetection.InputDataCalculator.InputGroup;
 import ru.spbstu.frauddetection.InputDataCalculator.InputType;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
 public class MockData extends AbstractData implements Serializable {
-    private List<InputGroup> data;
+    private List<InputGroup> data = new ArrayList<>();
     public MockData() {
         super();
         initForSentenceCase();
@@ -39,6 +38,7 @@ public class MockData extends AbstractData implements Serializable {
     public void addValue(String xml) {
         //converter xml to ...
     }
+
     public void addValue(List<InputType> values) {
         InputGroup tmp = new InputGroup();
         tmp.setValues(values);

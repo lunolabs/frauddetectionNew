@@ -1,10 +1,11 @@
 package ru.spbstu.frauddetection.sparkmanager;
 
+import org.apache.avro.generic.GenericData;
+import org.apache.spark.api.java.function.FlatMapFunction;
 import ru.spbstu.frauddetection.FraudConfig.ConfigurationParser.ConfigurationParser;
 import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Configuration;
 
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
@@ -36,18 +37,16 @@ public class SparkManager implements Serializable {
         try {
             properties.load(new FileInputStream(PROPERTIESFILE));
             String xmlConfig = new String(Files.readAllBytes(Paths.get((String)properties.get(XML_CONGIG_PATH_KEY))));
-            configuration = new ConfigurationParser().parseConfiguration(xmlConfig);
+            configuration = ConfigurationParser.parse(xmlConfig);
         } catch (Exception e) {
             new Exception(e);
         }
     }
 
     private static JavaStreamingContext ssc;
-    private static JavaSparkContext sc;
     static  {
         SparkConf conf = new SparkConf()
                 .setAppName("FraudProject").setMaster("local[*]");
-        sc = new JavaSparkContext(conf);
         ssc = new JavaStreamingContext(conf, Durations.seconds(10));
     }
 
@@ -59,21 +58,26 @@ public class SparkManager implements Serializable {
                 KafkaUtils.createStream(ssc, ZK_HOST, UUID.randomUUID().toString(), topicMap);
         //get massage
         JavaDStream<String> xmls = kafkaStream.map((Tuple2<String, String> tuple2) -> tuple2._2());
-        JavaDStream<List<InputGroup>> groupList = xmls.map(xml -> InputCalculator.calculate(configuration, xml));
+        JavaDStream<Tuple2<Integer, List<InputGroup>>> groupList = xmls.map(xml ->
+                new Tuple2<>(xml.hashCode(), InputCalculator.calculate(configuration, xml)));
 
-        JavaDStream<Map<InputGroup, List<InputGroup>>> verifiableList= groupList.map(list -> {
-            Map<InputGroup, List<InputGroup>> res = new HashMap<>();
-            AbstractData database = new MockData();
-            List<InputGroup> data = database.getValues(configuration.getUniqueFields());
-            for(InputGroup inputGroup : list) {
-                res.put(inputGroup, data);
-            }
-            return res;
-        });
+        AbstractData database = new MockData();
+        List<InputGroup> data = database.getValues(configuration.getUniqueFields());
 
-        //JavaDStream<InputGroup> groups = groupList.map(list -> sc.parallelize(list));
-        groupList.foreachRDD(rdd ->
+        JavaDStream<Tuple2<Integer, Tuple2<InputGroup, List<InputGroup>>>> setStream =
+                groupList.flatMap(tupl -> {
+                    List<Tuple2<Integer, Tuple2<InputGroup, List<InputGroup>>>> sets = new ArrayList<>();
+                    for(InputGroup inputGroup : tupl._2) {
+                        sets.add(new Tuple2<>(tupl._1, new Tuple2<>(inputGroup, data)));
+                    }
+                    return sets.listIterator();
+                });
+
+        setStream.foreachRDD(rdd ->
                 rdd.foreach(obj -> System.out.print("\n\n\n\n\n\n" + obj.toString() + "\n\n\n\n\n\n\n")));
+
+        JavaDStream<Tuple2<String, Boolean>> verdicts;
+
 
         ssc.start();
         try {
@@ -82,4 +86,5 @@ public class SparkManager implements Serializable {
             e.printStackTrace();
         }
     }
+
 }

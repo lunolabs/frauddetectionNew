@@ -20,12 +20,13 @@ public class InputCalculator implements Serializable {
     private static final Logger logger = Logger.getLogger(String.valueOf(InputCalculator.class));
 
     public static List<InputGroup> calculate(Configuration configuration, String inputXml) {
-        List<InputGroup> inputStruct = new ArrayList<InputGroup>();
+        List<InputGroup> inputStruct = new ArrayList<>();
 
         for (Group groupConfig : configuration.getGroups()) {
             InputGroup resultGroup = new InputGroup();
             try {
                 roundGroup(groupConfig, inputXml, resultGroup);
+                resultGroup.setMethod(groupConfig.getMethod());
             } catch (XPathExpressionException ex) {
                 logger.log(Level.ALL, "Excpetion of parsing: " + ex);
             }

@@ -11,8 +11,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>DataGenerator</module>
+<!--        <module>DataGenerator</module>
         <module>DataReceiveWebService</module>
+-->
         <module>InputDataCalculator</module>
         <module>FraudConfig</module>
         <module>DataStorage</module>

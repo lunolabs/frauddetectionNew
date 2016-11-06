@@ -8,57 +8,47 @@
     <artifactId>ru.spbstu.frauddetection.datastorage</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <junit.version>4.8.2</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <hadoop-core.version>1.2.1</hadoop-core.version>
+        <hadoop.version>2.7.2</hadoop.version>
+        <maven-compuler-plugin.version>3.5.1</maven-compuler-plugin.version>
+    </properties>
+
     <dependencies>
-
         <dependency>
             <groupId>ru.spbstu.frauddetection</groupId>
-            <artifactId>ru.spbstu.frauddetection.FraudConfig</artifactId>
+            <artifactId>ru.spbstu.frauddetection.fraudconfig</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>ru.spbstu.frauddetection</groupId>
-            <artifactId>ru.spbstu.frauddetection.InputDataCalculator</artifactId>
+            <artifactId>ru.spbstu.frauddetection.inputdatacalculator</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>2.7.2</version>
+            <version>${hadoop.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
-            <version>2.7.2</version>
+            <version>${hadoop.version}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
-            <version>2.7.2</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -66,13 +56,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compuler-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

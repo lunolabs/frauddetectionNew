@@ -1,10 +1,6 @@
 package ru.spbstu.frauddetection.sparkmanager;
 
-import akka.japi.Function2;
-import akka.japi.Procedure;
 import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Method;
-import ru.spbstu.frauddetection.detection.DetectionBase;
-import ru.spbstu.frauddetection.detection.SentenceDetection;
 
 import java.util.HashMap;
 import java.util.Map;

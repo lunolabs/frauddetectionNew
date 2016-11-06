@@ -1,7 +1,5 @@
 package ru.spbstu.frauddetection.sparkmanager;
 
-import org.apache.log4j.Logger;
-
 public class Starter {
     public static void main(String[] args) throws Exception {
 

@@ -11,17 +11,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!--<module>DataSet</module>-->
-<!--
-        <module>FraudProject/FlinkManager</module>
-        <module>FraudProject/StormManager</module>
--->
         <module>DataGenerator</module>
         <module>DataReceiveWebService</module>
         <module>InputDataCalculator</module>
         <module>FraudConfig</module>
         <module>DataStorage</module>
         <module>Detection</module>
+        <module>SparkManager</module>
     </modules>
 
 </project>

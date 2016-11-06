@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum Type implements Serializable {
     Integer,
     String,
-    Float,
+    Double,
     Boolean,
     Text,
     Enum,

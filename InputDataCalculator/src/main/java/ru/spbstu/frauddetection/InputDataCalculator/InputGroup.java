@@ -1,17 +1,28 @@
 package ru.spbstu.frauddetection.InputDataCalculator;
 
+import ru.spbstu.frauddetection.FraudConfig.ObjectModel.Method;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputGroup implements Serializable {
-    
+
+    private Method method;
     private List<InputType> values;
     private InputGroup group;
 
     public InputGroup()
     {
         values = new ArrayList<InputType>();
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
     }
 
     public List<InputType> getValues() {

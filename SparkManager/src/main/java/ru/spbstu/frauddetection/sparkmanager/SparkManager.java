@@ -1,7 +1,55 @@
 package ru.spbstu.frauddetection.sparkmanager;
 
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.apache.spark.streaming.kafka.KafkaUtils;
+import scala.Tuple2;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class SparkManager {
 
+    private static final String TOPIC_NAME = "xml_data";
+    private static final String ZK_HOST = "localhost:2181";
+
+    JavaSparkContext sc;
+    JavaStreamingContext ssc;
+
+    SparkManager() {
+        SparkConf conf = new SparkConf()
+                .setAppName("FraudProject").setMaster("local[*]");
+        sc = new JavaSparkContext(conf);
+        ssc = new JavaStreamingContext(sc, Durations.seconds(10));
+    }
+
+    public void run() {
+        //JavaDStream<String> xmlData = ssc.textFileStream("file:///home/lvs/other/tmp/sparkdir");
+        //JavaDStream<String> xmlData = ssc.textFileStream("hdfs://localhost:54310/test");
+        //JavaDStream<String> xmlData = ssc.textFileStream("hdfs://localhost:54310/test");
+
+        Map<String, Integer> topicMap = new HashMap<>();
+        //topic and number threads
+        topicMap.put(TOPIC_NAME, 1);
+        JavaPairReceiverInputDStream<String, String> kafkaStream =
+                KafkaUtils.createStream(ssc, ZK_HOST, UUID.randomUUID().toString(), topicMap);
+        //get massage
+        JavaDStream<String> lines = kafkaStream.map((Tuple2<String, String> tuple2) -> tuple2._2());
+        lines.foreachRDD(rdd ->
+                rdd.foreach(str -> System.out.print("\n\n\n\n\n\n" + str + "\n\n\n\n\n\n\n")));
+
+        ssc.start();
+        try {
+            ssc.awaitTermination();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 /*
 import org.apache.kafka.common.utils.Utils;

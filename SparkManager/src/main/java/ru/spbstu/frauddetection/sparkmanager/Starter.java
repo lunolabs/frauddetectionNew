@@ -3,6 +3,9 @@ package ru.spbstu.frauddetection.sparkmanager;
 import org.apache.log4j.Logger;
 
 public class Starter {
+    public static void main(String[] args) throws Exception {
+
+    }
 /*
     private static final Logger logger = Logger.getLogger(StormStarter.class);
 

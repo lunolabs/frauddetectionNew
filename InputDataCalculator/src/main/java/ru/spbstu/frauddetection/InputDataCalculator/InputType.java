@@ -20,9 +20,9 @@ public class InputType<T> implements Serializable {
         InputTypeFactory.put(Type.Integer, (val, name) -> new InputType<>(Integer.parseInt(val), name));
         InputTypeFactory.put(Type.String,  (val, name) -> new InputType<>(val, name));
         InputTypeFactory.put(Type.Boolean, (val, name) -> new InputType<>(Boolean.parseBoolean(val), name));
-        InputTypeFactory.put(Type.Float,   (val, name) -> new InputType<>(Float.parseFloat(val), name));
+        InputTypeFactory.put(Type.Double,  (val, name) -> new InputType<>(Double.parseDouble(val), name));
         InputTypeFactory.put(Type.Text,    (val, name) -> new InputType<>(val, name));
-        InputTypeFactory.put(Type.Float,   (val, name) -> new InputType<>(tmp_enum.valueOf(val), val));
+        InputTypeFactory.put(Type.Enum,    (val, name) -> new InputType<>(tmp_enum.valueOf(val), val));
         InputTypeFactory.put(Type.Date,    (val, name) -> {
             InputType res = null;
             try {

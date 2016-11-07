@@ -6,12 +6,12 @@
                 <type>String</type>
         </field>
     </group>
-        <group method="Sentence">
-            <field>
-                <xpath_name>medicine</xpath_name>
-                <type>String</type>
-            </field>
-        </group>
+    <group method="Sentence">
+        <field>
+            <xpath_name>medicine</xpath_name>
+            <type>String</type>
+        </field>
+    </group>
     <group method="KMeans">
         <field>
             <xpath_name>dosage</xpath_name>

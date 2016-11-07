@@ -6,6 +6,7 @@ ruscorpora.model.bin
 **/.idea/*
 **/.idea/*
 **/target/*
+**/tmp/*
 *.iml
 *.project
 *.prefs
